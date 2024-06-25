@@ -9,7 +9,7 @@ from sklearn.metrics import mean_squared_error
 
 class GDRgression:
     def __init__(self, epochs: int=25, learning_rate: float=0.01) -> None:
-        """_summary_
+        """Initializing epochs, learning_rate
 
         Args:
             epochs (int, optional): _description_. Defaults to 10.
@@ -21,6 +21,15 @@ class GDRgression:
         self.beta0 = None
         
     def fit(self, X: pd.DataFrame, y: pd.DataFrame) -> pd.Series:
+        """Fits the training data to Gradient GD Linear Regression model
+
+        Args:
+            X_train (pd.DataFrame): Independent Variable
+            y_train (pd.DataFrame): Dependent Variable
+
+        Returns:
+            pd.Series: returns intercept and coefficient
+        """
         self.beta = np.ones((X.shape[1],1))
         self.beta0 = 0
         
@@ -40,11 +49,29 @@ class GDRgression:
         return self.beta, self.beta0
     
     def predict(self, X: pd.DataFrame) -> pd.Series:
+        """Predicts on test data using the trained model
+
+        Args:
+            X_test (pd.DataFrame): Independent test Variable
+
+        Returns:
+            pd.Series: 
+        """
         X_test = X.values
         return (self.beta0 + X_test@self.beta)
     
     def rmse(self, y_pred: pd.Series, y_actual: pd.Series) -> float:
-        return math.sqrt((y_pred - y_actual).T@(y_pred - y_actual))
+        """Evaluation metrics Room Mean Squared Error(RMSE).
+
+        Args:
+            y_acutal (array): Actual Output 
+            y_pred (array): Predicted Output
+
+        Returns:
+        RMSE error: integer
+                retuns the error for give model
+        """
+        return math.sqrt(((y_pred - y_actual).T@(y_pred - y_actual))/y_actual.shape[0])
         
     
 if __name__ == "__main__":
