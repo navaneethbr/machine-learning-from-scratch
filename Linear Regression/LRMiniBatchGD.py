@@ -9,11 +9,12 @@ from sklearn.metrics import mean_squared_error
 
 class MBGDRegression:
     def __init__(self, batch_size: int=3, epochs: int=100, learning_rate: float=0.01) -> None:
-        """Initializing epochs, learning_rate
+        """Initializing epochs, learning_rate, batch_size
 
         Args:
             epochs (int, optional): number of iteration. Defaults to 100.
             learning_rate (float, optional): set intial learning rate. Defaults to 0.01.
+            batch_size (int, optional): how many batchs should the data be divided into. Default to 3.
         """
         self.epochs = epochs
         self.lr = learning_rate
@@ -41,7 +42,7 @@ class MBGDRegression:
         
         for i in range(self.epochs):
             for j in range(X_train.shape[0]//self.batch_size):
-                # self.lr = self._learning_schedule(i * X_train.shape[0] + j)
+                # self.lr = self._learning_schedule(i * X_train.shape[0] + j) ## dynamic learning rate
                 
                 rand = random.sample(range(X_train.shape[0]), self.batch_size)  
                 
