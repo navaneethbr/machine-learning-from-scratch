@@ -65,7 +65,7 @@ if __name__ == "__main__":
     # prediction from the model we built 
     our_model = MultipleLinearRegression()
     
-    df = pd.read_csv("/Users/navaneeth/Documents/Work/Machine Learning from scratch /Dataset/Student_Performance.csv")
+    df = pd.read_csv("/Users/navaneeth/Documents/Work/Machine Learning from Scratch/Dataset/Student_Performance.csv")
     
     independent_var = ['Hours Studied','Previous Scores','Extracurricular Activities','Sleep Hours','Sample Question Papers Practiced']
     X_train, y_train, X_test, y_test = np.array(np.array(df.loc[:900, independent_var])), np.array(df.loc[:900, "Performance Index"]), np.array(df.loc[901:,independent_var]), np.array(df.loc[901:, "Performance Index"])
