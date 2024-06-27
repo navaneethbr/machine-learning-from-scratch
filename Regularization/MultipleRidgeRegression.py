@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn import linear_model
 from sklearn.metrics import mean_squared_error
 
-class MultipleLinearRegression:
+class MultipleRidgeRegression:
     """This class implements Multiple Ridge Regression, with one or more independent varibale and one dependent variable
     """
     def __init__(self, alpha: float=0.01) -> None:
@@ -66,7 +66,7 @@ class MultipleLinearRegression:
 if __name__ == "__main__":
     
     # prediction from the model we built 
-    our_model = MultipleLinearRegression()
+    our_model = MultipleRidgeRegression()
     
     df = pd.read_csv("/Users/navaneeth/Documents/Work/Machine Learning from Scratch/Dataset/Student_Performance.csv")
     
