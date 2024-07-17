@@ -7,10 +7,25 @@ from sklearn.datasets import load_iris
 
 class SoftmaxRegression:
     def __init__(self, epochs: int=1000, learning_rate: float=0.1) -> None:
+        """Initializing epochs, learning_rate
+
+        Args:
+            epochs (int, optional): _description_. Defaults to 10.
+            learning_rate (float, optional): _description_. Defaults to 0.01.
+        """
         self.lr = learning_rate
         self.epochs = epochs
         
     def fit(self, X: pd.DataFrame, y: pd.DataFrame) -> np.ndarray:
+        """Fits the training data to Gradient GD Linear Regression model
+
+        Args:
+            X_train (pd.DataFrame): Independent Variable
+            y_train (pd.DataFrame): Dependent Variable
+
+        Returns:
+            pd.Series: returns intercept and coefficient
+        """
         Y_onehot = onehot_encoder.fit_transform(y.reshape(-1,1))
         n = X.shape[0]
         # X = np.insert(X, 0, 1, axis=1)
@@ -25,6 +40,15 @@ class SoftmaxRegression:
         return -self.W
     
     def loss(self, X: pd.DataFrame, y: pd.DataFrame) -> float:
+        """Calculats loss for the test dataset
+
+        Args:
+            X (pd.DataFrame): test data
+            y (pd.DataFrame): test data
+
+        Returns:
+            float: _description_
+        """
         y = onehot_encoder.fit_transform(y.reshape(-1,1))
         # X = np.insert(X, 0, 1, axis=1)
         z = - X @ self.W
