@@ -49,12 +49,15 @@ class SoftmaxRegression:
         Returns:
             float: _description_
         """
-        y = onehot_encoder.fit_transform(y.reshape(-1,1))
-        # X = np.insert(X, 0, 1, axis=1)
-        z = - X @ self.W
-        n = X.shape[0]
-        loss = 1/n * (np.trace(X @ self.W @ y.T) + np.sum(np.log(np.sum(np.exp(z), axis=1))))
+        N = y.shape[0]  # Batch size
+        Y_onehot = onehot_encoder.fit_transform(y.reshape(-1,1))
+        self.W = np.zeros((X.shape[1], Y_onehot.shape[1]))
+        y_pred = softmax(X@self.W, axis=1)
+        # y_pred = np.exp(y_pred - np.max(y_pred, axis=1, keepdims=True))  
+        # y_pred = y_pred / np.sum(y_pred, axis=1, keepdims=True)
+        loss = -np.sum(y * np.log(y_pred)) / N  # Average loss across the batch
         return loss
+        
             
 if __name__ == "__main__":
     X = load_iris().data
